@@ -1,5 +1,6 @@
 #include "service.h"
 
+#include "shell.h"
 #include <winsock2.h>
 
 SERVICE_STATUS g_svc_status = {
@@ -46,7 +47,8 @@ void WINAPI svc_main(DWORD argc, LPWSTR *argv) {
 
     report_status(SERVICE_RUNNING, NO_ERROR, 0);
 
-    WaitForSingleObject(g_stop_event, INFINITE);
+    shell();
+
     // SERVICE_STOP_PENDING has already been reported by ctrl_handler upon receiving
     // stop signal
     WSACleanup();
