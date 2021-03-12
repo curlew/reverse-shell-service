@@ -47,7 +47,10 @@ void WINAPI svc_main(DWORD argc, LPWSTR *argv) {
 
     report_status(SERVICE_RUNNING, NO_ERROR, 0);
 
-    shell();
+    // this function is written as though it's to be run as a thread, but because
+    // ctrl_handler is invoked to set the stop event, it's called as a normal
+    // blocking function here
+    shell(g_stop_event);
 
     // SERVICE_STOP_PENDING has already been reported by ctrl_handler upon receiving
     // stop signal
