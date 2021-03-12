@@ -1,5 +1,8 @@
 #include "service.h"
 
+#include "shell.h"
+#include <winsock2.h>
+
 SERVICE_STATUS g_svc_status = {
     .dwServiceType             = SERVICE_WIN32_OWN_PROCESS,
     .dwServiceSpecificExitCode = 0,
@@ -18,7 +21,7 @@ void WINAPI svc_main(DWORD argc, LPWSTR *argv) {
         return;
     }
 
-    report_status(SERVICE_START_PENDING, NO_ERROR, 500);
+    report_status(SERVICE_START_PENDING, NO_ERROR, 600);
 
     // there's no risk of receiving a stop signal here before g_stop_event has
     // been created, as, by default, only SERVICE_CONTROL_INTERROGATE is accepted.
@@ -33,11 +36,25 @@ void WINAPI svc_main(DWORD argc, LPWSTR *argv) {
         return;
     }
 
+    report_status(SERVICE_START_PENDING, NO_ERROR, 500);
+
+    // initialise winsock
+    WSADATA wsadata;
+    if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) {
+        report_status(SERVICE_STOPPED, GetLastError(), 0);
+        return;
+    }
+
     report_status(SERVICE_RUNNING, NO_ERROR, 0);
 
-    WaitForSingleObject(g_stop_event, INFINITE);
+    // this function is written as though it's to be run as a thread, but because
+    // ctrl_handler is invoked to set the stop event, it's called as a normal
+    // blocking function here
+    shell(g_stop_event);
+
     // SERVICE_STOP_PENDING has already been reported by ctrl_handler upon receiving
     // stop signal
+    WSACleanup();
     report_status(SERVICE_STOPPED, NO_ERROR, 0);
 }
 
