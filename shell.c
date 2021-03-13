@@ -20,7 +20,7 @@ void shell(HANDLE stop_event) {
     // that matches its first two arguments, subject to restrictions imposed by
     // hints. there may be multiple ADDRINFOW structs given as the host may be
     // multihomed, accessible over multiple protocols, etc
-    if (GetAddrInfoW(L"localhost", L"1234", &hints, &addr_list) != 0) {
+    if (GetAddrInfoW(SERVER_HOST, SERVER_PORT, &hints, &addr_list) != 0) {
         return;
     }
 
