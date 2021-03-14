@@ -3,9 +3,6 @@
 
 #include <windows.h>
 
-#define SERVICE_NAME TEXT("svcname")
-#define DISPLAY_NAME TEXT("Service Name")
-
 extern SERVICE_STATUS        g_svc_status;
 extern SERVICE_STATUS_HANDLE g_svc_status_handle;
 extern HANDLE                g_stop_event;
