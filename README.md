@@ -1,7 +1,7 @@
 <div align="center">
 
 # Reverse Shell Service
-[![Codacy Badge](https://img.shields.io/codacy/grade/7355bce26a454b16953531de1b831d75?style=flat-square&logo=codacy)](https://www.codacy.com/gh/curlew/reverse-shell-service/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=curlew/reverse-shell-service&amp;utm_campaign=Badge_Grade)
+[![Codacy grade](https://img.shields.io/codacy/grade/e9336e54ee254d0e994142b77bc3a68a?logo=codacy&style=flat-square)](https://app.codacy.com/gh/curlew/reverse-shell-service/dashboard)
 ![GitHub](https://img.shields.io/github/license/curlew/reverse-shell-service?style=flat-square)
 
 </div>
