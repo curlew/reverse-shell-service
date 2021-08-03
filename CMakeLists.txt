@@ -16,6 +16,9 @@ add_compile_definitions(UNICODE
                         SERVICE_NAME=L"${SERVICE_NAME}"
                         DISPLAY_NAME=L"${DISPLAY_NAME}")
 
+set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG} /MTd")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /MT")
+
 add_executable(svc main.c service.c shell.c)
 
 target_link_libraries(svc Ws2_32)

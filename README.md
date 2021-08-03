@@ -10,7 +10,7 @@
 `SERVER_HOST` and `SERVER_PORT` default to `localhost` and `1234`, respectively.
 ```
 $ cmake -B build -DSERVER_HOST="192.168.1.2" -DSERVER_PORT="4321"
-$ cmake --build build
+$ cmake --build build --config Release
 ```
 
 ## Installation
@@ -26,4 +26,4 @@ Exit code can then be determined by checking the value of `$LastExitCode`, in Po
 | 2 | Error opening a handle to the SCM |
 | 3 | Error creating the service |
 
-\*: May indicate a bug. Please open an issue, specifying the actual location of the service binary.  
+\*: May indicate a bug. Please open an issue, specifying the actual location of the service binary.
