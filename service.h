@@ -1,5 +1,5 @@
-#ifndef GUARD_7BC1A2847D324ECB8089708185E04030
-#define GUARD_7BC1A2847D324ECB8089708185E04030
+#ifndef SERVICE_H
+#define SERVICE_H
 
 #include <windows.h>
 
@@ -9,4 +9,4 @@ extern HANDLE                g_stop_event;
 
 void WINAPI svc_main(DWORD, LPWSTR *);
 
-#endif // GUARD_7BC1A2847D324ECB8089708185E04030
+#endif // SERVICE_H
