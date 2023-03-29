@@ -11,23 +11,31 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[]) {
         }
 
         SC_HANDLE scm = OpenSCManager(NULL, NULL, GENERIC_WRITE);
-        if (!scm) { return 2; }
+        if (!scm) {
+            return 2;
+        }
 
         SC_HANDLE service =
             CreateService(scm, SERVICE_NAME, DISPLAY_NAME,
-                          SERVICE_ALL_ACCESS,        // desired access
-                          SERVICE_WIN32_OWN_PROCESS, // service type
-                          SERVICE_AUTO_START,        // start type
-                          SERVICE_ERROR_NORMAL,      // error control type
-                          self_path,                 // path to executable
-                          NULL,                      // no load ordering group
-                          NULL,                      // no tag identifier
-                          NULL,                      // no dependencies
-                          NULL,                      // LocalSystem account
-                          NULL);                     // no password
+                          SERVICE_ALL_ACCESS,
+                          SERVICE_WIN32_OWN_PROCESS,
+                          SERVICE_AUTO_START,
+                          SERVICE_ERROR_NORMAL,
+                          self_path,
+                          NULL,
+                          NULL,
+                          NULL,
+                          NULL,
+                          NULL);
         if (!service) {
             CloseServiceHandle(scm);
             return 3;
+        }
+
+        if (SERVICE_DESC != L"") {
+            SERVICE_DESCRIPTIONW desc;
+            desc.lpDescription = SERVICE_DESC;
+            ChangeServiceConfig2W(service, SERVICE_CONFIG_DESCRIPTION, &desc);
         }
 
         StartServiceW(service, 0, NULL);

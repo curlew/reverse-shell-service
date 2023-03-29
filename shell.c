@@ -80,7 +80,7 @@ void shell(HANDLE stop_event) {
 
 bool interruptible_sleep(unsigned long long ms, HANDLE interrupt_event) {
     LARGE_INTEGER due_time;
-    due_time.QuadPart = ms * -10000LL; // convert ms to 100 ns invervals. negative indicates relative time
+    due_time.QuadPart = ms * -10000LL; // convert ms to 100 ns invervals
 
     HANDLE timer = CreateWaitableTimerW(NULL, TRUE, NULL);
     SetWaitableTimer(timer, &due_time, 0, NULL, NULL, 0);

@@ -7,11 +7,17 @@
 </div>
 
 ## Compilation
-`SERVER_HOST` and `SERVER_PORT` default to `localhost` and `1234`, respectively.
 ```
 $ cmake -B build -DSERVER_HOST="192.168.1.2" -DSERVER_PORT="4321"
 $ cmake --build build --config Release
 ```
+
+The following options can be set:
+- `-DSERVER_HOST` (default: "localhost")
+- `-DSERVER_PORT` (default: "1234")
+- `-DSERVICE_NAME` (default: "svcname")
+- `-DSERVICE_DESC` (default: none)
+- `-DDISPLAY_NAME` (default: "Service Name")
 
 ## Installation
 
@@ -22,8 +28,6 @@ Exit code can then be determined by checking the value of `$LastExitCode`, in Po
 | Exit Code | Cause |
 | - | - |
 | 0 | Installation succeeded |
-| 1\* | Error getting path to the service binary |
+| 1 | Error getting path to the service binary |
 | 2 | Error opening a handle to the SCM |
 | 3 | Error creating the service |
-
-\*: May indicate a bug. Please open an issue, specifying the actual location of the service binary.
