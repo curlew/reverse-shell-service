@@ -15,6 +15,9 @@ static void WINAPI ctrl_handler(DWORD);
 static void report_status(DWORD, DWORD, DWORD);
 
 void WINAPI svc_main(DWORD argc, LPWSTR *argv) {
+    (void)argc;
+    (void)argv;
+
     // this handle doesn't need to be closed
     g_svc_status_handle = RegisterServiceCtrlHandlerW(SERVICE_NAME, ctrl_handler);
     if (!g_svc_status_handle) {

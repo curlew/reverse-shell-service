@@ -6,7 +6,7 @@
 
 #define SIGNALLED(object) (WaitForSingleObject(object, 0) == WAIT_OBJECT_0)
 
-static bool interruptible_sleep(unsigned long long ms, HANDLE interrupt_event);
+static bool interruptible_sleep(long long ms, HANDLE interrupt_event);
 
 void shell(HANDLE stop_event) {
     ADDRINFOW *addr_list = NULL,
@@ -26,7 +26,7 @@ void shell(HANDLE stop_event) {
 
     while (!SIGNALLED(stop_event)) {
         // try to connect to each of the addresses given by GetAddrInfoW
-        SOCKET sock;
+        SOCKET sock = INVALID_SOCKET;
         for (ADDRINFOW *addr = addr_list; addr != NULL; addr = addr->ai_next) {
             sock = WSASocket(addr->ai_family, addr->ai_socktype, addr->ai_protocol,
                              NULL, 0, 0);
@@ -78,7 +78,7 @@ void shell(HANDLE stop_event) {
     FreeAddrInfoW(addr_list);
 }
 
-bool interruptible_sleep(unsigned long long ms, HANDLE interrupt_event) {
+bool interruptible_sleep(long long ms, HANDLE interrupt_event) {
     LARGE_INTEGER due_time;
     due_time.QuadPart = ms * -10000LL; // convert ms to 100 ns invervals
 

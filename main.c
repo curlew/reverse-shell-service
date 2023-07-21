@@ -3,6 +3,9 @@
 #include <windows.h>
 
 int wmain(int argc, wchar_t *argv[], wchar_t *envp[]) {
+    (void)argc;
+    (void)envp;
+
     if (lstrcmpiW(argv[1], L"install") == 0) {
         wchar_t self_path[MAX_PATH];
         // "FileName" here is referring to a fully qualified name (path)
@@ -32,7 +35,7 @@ int wmain(int argc, wchar_t *argv[], wchar_t *envp[]) {
             return 3;
         }
 
-        if (SERVICE_DESC != L"") {
+        if (SERVICE_DESC[0] != L'\0') {
             SERVICE_DESCRIPTIONW desc;
             desc.lpDescription = SERVICE_DESC;
             ChangeServiceConfig2W(service, SERVICE_CONFIG_DESCRIPTION, &desc);
